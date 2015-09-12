@@ -1,0 +1,9 @@
+<map id="EcatDgram" name="EcatDgram">
+<area shape="rect" id="node2" href="$structAPRD.html" title="Read by position in network (aka Auto Increment Physical Read) The read is performed on the node who&#39;..." alt="" coords="5,80,64,107"/>
+<area shape="rect" id="node3" href="$structAPWR.html" title="Write by position in network (Auto Increment Physical Write) Like the APRD datagram, but a write version. " alt="" coords="89,80,151,107"/>
+<area shape="rect" id="node4" href="$structARMW.html" title="Read by position in network and write to the same address of all following nodes. ..." alt="" coords="175,80,240,107"/>
+<area shape="rect" id="node5" href="$structBRD.html" title="Broadcast read. " alt="" coords="265,80,316,107"/>
+<area shape="rect" id="node6" href="$structBWR.html" title="Broadcast write. This type of datagram writes data to the same location on every node in the network..." alt="" coords="341,80,395,107"/>
+<area shape="rect" id="node7" href="$structFPRD.html" title="Read by assigned node ID (Configured Address Physical Read) The master assigns each node a unique 16&#45;..." alt="" coords="420,80,477,107"/>
+<area shape="rect" id="node8" href="$structFPWR.html" title="Write by assigned node ID (Configured Address Physical Write) " alt="" coords="503,80,565,107"/>
+</map>

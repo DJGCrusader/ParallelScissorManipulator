@@ -1,0 +1,6 @@
+<map id="CML_TrjScurve.h" name="CML_TrjScurve.h">
+<area shape="rect" id="node2" href="$CML__Settings_8h.html" title="This file provides some configuration options used to customize the Copley Motion Libraries..." alt="" coords="11,304,127,331"/>
+<area shape="rect" id="node4" href="$CML__Trajectory_8h.html" title="CML_Trajectory.h" alt="" coords="63,80,189,107"/>
+<area shape="rect" id="node5" href="$CML__Error_8h.html" title="This file defines the top level error class used throughout the library. " alt="" coords="96,155,192,181"/>
+<area shape="rect" id="node6" href="$CML__Utils_8h.html" title="This file holds various handy utility types and functions. " alt="" coords="147,229,241,256"/>
+</map>

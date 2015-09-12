@@ -1,0 +1,7 @@
+<map id="CML_Can.h" name="CML_Can.h">
+<area shape="rect" id="node2" href="$CML__Error_8h.html" title="This file defines the top level error class used throughout the library. " alt="" coords="55,229,151,256"/>
+<area shape="rect" id="node5" href="$CML__Utils_8h.html" title="This file holds various handy utility types and functions. " alt="" coords="5,304,99,331"/>
+<area shape="rect" id="node7" href="$CML__Reference_8h.html" title="This header file defines a set of classes used to handle reference counting within the CML library..." alt="" coords="105,80,233,107"/>
+<area shape="rect" id="node3" href="$CML__Settings_8h.html" title="This file provides some configuration options used to customize the Copley Motion Libraries..." alt="" coords="119,379,235,405"/>
+<area shape="rect" id="node8" href="$CML__Threads_8h.html" title="The classes defined in this file provide an operating system independent way of accessing multi&#45;taski..." alt="" coords="105,155,220,181"/>
+</map>

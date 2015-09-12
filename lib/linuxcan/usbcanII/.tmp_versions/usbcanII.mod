@@ -1,0 +1,2 @@
+/home/dgonz/projects/ParallelScissorManipulator/lib/linuxcan/usbcanII/usbcanII.ko
+/home/dgonz/projects/ParallelScissorManipulator/lib/linuxcan/usbcanII/usbcanHWIf.o /home/dgonz/projects/ParallelScissorManipulator/lib/linuxcan/usbcanII/../common/VCanOsIf.o /home/dgonz/projects/ParallelScissorManipulator/lib/linuxcan/usbcanII/../common/objbuf.o /home/dgonz/projects/ParallelScissorManipulator/lib/linuxcan/usbcanII/../common/osif_functions_kernel.o /home/dgonz/projects/ParallelScissorManipulator/lib/linuxcan/usbcanII/../common/queue.o

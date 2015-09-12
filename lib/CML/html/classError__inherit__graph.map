@@ -1,0 +1,22 @@
+<map id="Error" name="Error">
+<area shape="rect" id="node2" href="$classAmpFileError.html" title="This class represents error conditions that can occur when loading amplifer data from a data file..." alt="" coords="107,5,205,32"/>
+<area shape="rect" id="node3" href="$classCanError.html" title="Class used to represent an error condition returned from a CAN interface function. " alt="" coords="119,56,193,83"/>
+<area shape="rect" id="node5" href="$classEtherCatError.html" title="This class holds the error codes that describe EtherCAT error conditions. " alt="" coords="105,107,207,133"/>
+<area shape="rect" id="node6" href="$classEventError.html" title="This class represents error conditions related to the Event object. " alt="" coords="114,157,198,184"/>
+<area shape="rect" id="node7" href="$classFirmwareError.html" title="This class represents error conditions that can occur while accessing a Copley Controls amplifier fir..." alt="" coords="104,208,208,235"/>
+<area shape="rect" id="node8" href="$classIOFileError.html" title="This class represents error conditions that can occur when loading IO module data from a data file..." alt="" coords="113,259,199,285"/>
+<area shape="rect" id="node9" href="$classLinkError.html" title="This class represents error conditions that can occur in the Linkage class. " alt="" coords="119,309,193,336"/>
+<area shape="rect" id="node10" href="$classNetworkError.html" title="This class holds the error codes that describe various Netowrk error conditions. " alt="" coords="107,360,205,387"/>
+<area shape="rect" id="node11" href="$classNodeError.html" title="This class represents node errors. " alt="" coords="115,411,197,437"/>
+<area shape="rect" id="node16" href="$classPathError.html" title="This class represents errors returned by the path Path object. " alt="" coords="117,461,195,488"/>
+<area shape="rect" id="node17" href="$classPDO__Error.html" title="This class represents error conditions related to PDOs. " alt="" coords="113,512,199,539"/>
+<area shape="rect" id="node18" href="$classScurveError.html" title="This class represents error conditions that can occur in the TrjScurve class. " alt="" coords="111,563,201,589"/>
+<area shape="rect" id="node19" href="$classSDO__Error.html" title="This class represents SDO errors. " alt="" coords="113,613,199,640"/>
+<area shape="rect" id="node20" href="$classThreadError.html" title="Errors related to the multi&#45;threaded libraries. " alt="" coords="111,664,201,691"/>
+<area shape="rect" id="node21" href="$classTrjError.html" title="This class represents error conditions reported by the trajectory classes. " alt="" coords="123,715,189,741"/>
+<area shape="rect" id="node4" href="$classCanOpenError.html" title="This class holds the error codes that describe CANopen error conditions. " alt="" coords="265,56,370,83"/>
+<area shape="rect" id="node12" href="$classAmpError.html" title="This class represents error conditions that can occur in the Copley Amplifier object. " alt="" coords="279,360,356,387"/>
+<area shape="rect" id="node14" href="$classCopleyNodeError.html" title="This class represents errors that can be returned by the CopleyNode class. " alt="" coords="256,411,379,437"/>
+<area shape="rect" id="node15" href="$classIOError.html" title="I/O module errors. " alt="" coords="285,461,349,488"/>
+<area shape="rect" id="node13" href="$classAmpFault.html" title="This class represents latching amplifier fault conditions. " alt="" coords="427,360,506,387"/>
+</map>

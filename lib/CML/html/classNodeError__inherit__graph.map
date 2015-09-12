@@ -1,0 +1,7 @@
+<map id="NodeError" name="NodeError">
+<area shape="rect" id="node3" href="$classAmpError.html" title="This class represents error conditions that can occur in the Copley Amplifier object. " alt="" coords="5,155,81,181"/>
+<area shape="rect" id="node5" href="$classCopleyNodeError.html" title="This class represents errors that can be returned by the CopleyNode class. " alt="" coords="107,155,229,181"/>
+<area shape="rect" id="node6" href="$classIOError.html" title="I/O module errors. " alt="" coords="253,155,317,181"/>
+<area shape="rect" id="node2" href="$classError.html" title="This class is the root class for all error codes returned by functions defined within the Motion Libr..." alt="" coords="143,5,193,32"/>
+<area shape="rect" id="node4" href="$classAmpFault.html" title="This class represents latching amplifier fault conditions. " alt="" coords="5,229,83,256"/>
+</map>

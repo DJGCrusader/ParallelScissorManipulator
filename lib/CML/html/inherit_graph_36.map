@@ -1,0 +1,4 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$classNetworkNodeInfo.html" title="Private data owned by the network object attached to every node. " alt="" coords="6,5,130,32"/>
+<area shape="rect" id="node2" href="$structCanOpenNodeInfo.html" title="The CanOpenNodeInfo structure holds some data required by the CANopen network interface which is pres..." alt="" coords="179,5,309,32"/>
+</map>

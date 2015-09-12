@@ -1,0 +1,16 @@
+<map id="PDO" name="PDO">
+<area shape="rect" id="node3" href="$classRPDO.html" title="Receive PDO (received by node, transmitted by this software). " alt="" coords="216,157,277,184"/>
+<area shape="rect" id="node10" href="$classTPDO.html" title="Transmit PDO (transmitted by node, received by this software). " alt="" coords="217,385,276,412"/>
+<area shape="rect" id="node2" href="$classRefObj.html" title="This class is used to track object references in the CML library. " alt="" coords="6,259,69,285"/>
+<area shape="rect" id="node4" href="$classIOModule_1_1AlgOutPDO.html" title="Receive PDO for mapping analog outputs. " alt="" coords="355,5,445,32"/>
+<area shape="rect" id="node5" href="$classIOModule_1_1DigOutPDO.html" title="Receive PDO for mapping digital output pins. " alt="" coords="354,56,446,83"/>
+<area shape="rect" id="node6" title="Receive PDO used to send control word updates. " alt="" coords="355,107,445,133"/>
+<area shape="rect" id="node7" title="Receive PDO used to receive high resolution time stamp messages. " alt="" coords="326,157,474,184"/>
+<area shape="rect" id="node8" href="$classRPDO__LinkCtrl.html" title="Receive PDO used to update the control word of all amplifiers in the linkage. " alt="" coords="343,208,457,235"/>
+<area shape="rect" id="node9" title="Receive PDO used to send PVT segments to the amplifier This is only used on CANopen networks..." alt="" coords="345,259,455,285"/>
+<area shape="rect" id="node11" href="$classIOModule_1_1AlgInPDO.html" title="Transmit PDO for mapping analog inputs. " alt="" coords="359,309,441,336"/>
+<area shape="rect" id="node12" href="$classIOModule_1_1DigInPDO.html" title="Transmit PDO for mapping digital inputs. " alt="" coords="359,360,441,387"/>
+<area shape="rect" id="node13" title="Transmit PDO used to send out high resolution time stamp messages. " alt="" coords="327,411,473,437"/>
+<area shape="rect" id="node14" title="Transmit PDO used to send out PVT buffer status updates. " alt="" coords="345,461,455,488"/>
+<area shape="rect" id="node15" title="This PDO is used to get status updates from the drive any time the status changes. " alt="" coords="348,512,452,539"/>
+</map>

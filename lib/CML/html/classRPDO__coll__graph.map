@@ -1,0 +1,5 @@
+<map id="RPDO" name="RPDO">
+<area shape="rect" id="node2" href="$classPDO.html" title="PDO (Process Data Object) base class. " alt="" coords="52,96,103,123"/>
+<area shape="rect" id="node3" href="$classRefObj.html" title="This class is used to track object references in the CML library. " alt="" coords="5,5,67,32"/>
+<area shape="rect" id="node4" href="$classPmap.html" title="This class allows variables to be mapped into a PDO. " alt="" coords="92,5,147,32"/>
+</map>

@@ -1,0 +1,2 @@
+/home/dgonz/projects/ParallelScissorManipulator/lib/linuxcan/mhydra/mhydra.ko
+/home/dgonz/projects/ParallelScissorManipulator/lib/linuxcan/mhydra/mhydraHWIf.o /home/dgonz/projects/ParallelScissorManipulator/lib/linuxcan/mhydra/../common/VCanOsIf.o /home/dgonz/projects/ParallelScissorManipulator/lib/linuxcan/mhydra/../common/objbuf.o /home/dgonz/projects/ParallelScissorManipulator/lib/linuxcan/mhydra/../common/osif_functions_kernel.o /home/dgonz/projects/ParallelScissorManipulator/lib/linuxcan/mhydra/../common/queue.o

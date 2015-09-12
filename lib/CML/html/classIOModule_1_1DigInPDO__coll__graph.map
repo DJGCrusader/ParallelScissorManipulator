@@ -1,0 +1,6 @@
+<map id="IOModule::DigInPDO" name="IOModule::DigInPDO">
+<area shape="rect" id="node2" href="$classTPDO.html" title="Transmit PDO (transmitted by node, received by this software). " alt="" coords="49,173,107,200"/>
+<area shape="rect" id="node3" href="$classPDO.html" title="PDO (Process Data Object) base class. " alt="" coords="53,96,104,123"/>
+<area shape="rect" id="node4" href="$classRefObj.html" title="This class is used to track object references in the CML library. " alt="" coords="6,5,68,32"/>
+<area shape="rect" id="node5" href="$classPmap.html" title="This class allows variables to be mapped into a PDO. " alt="" coords="93,5,148,32"/>
+</map>

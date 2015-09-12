@@ -1,0 +1,5 @@
+<map id="LinkTrajectory" name="LinkTrajectory">
+<area shape="rect" id="node3" href="$classLinkTrjScurve.html" title="Multi&#45;axis s&#45;curve profile. " alt="" coords="5,155,107,181"/>
+<area shape="rect" id="node4" href="$classPath.html" title="Multi&#45;axis complex trajectory path. " alt="" coords="131,155,180,181"/>
+<area shape="rect" id="node2" href="$classRefObj.html" title="This class is used to track object references in the CML library. " alt="" coords="74,5,136,32"/>
+</map>

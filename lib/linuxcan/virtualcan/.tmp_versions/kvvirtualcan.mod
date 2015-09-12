@@ -1,0 +1,2 @@
+/home/dgonz/projects/ParallelScissorManipulator/lib/linuxcan/virtualcan/kvvirtualcan.ko
+/home/dgonz/projects/ParallelScissorManipulator/lib/linuxcan/virtualcan/virtualcan.o /home/dgonz/projects/ParallelScissorManipulator/lib/linuxcan/virtualcan/../common/VCanOsIf.o /home/dgonz/projects/ParallelScissorManipulator/lib/linuxcan/virtualcan/../common/objbuf.o /home/dgonz/projects/ParallelScissorManipulator/lib/linuxcan/virtualcan/../common/osif_functions_kernel.o /home/dgonz/projects/ParallelScissorManipulator/lib/linuxcan/virtualcan/../common/queue.o

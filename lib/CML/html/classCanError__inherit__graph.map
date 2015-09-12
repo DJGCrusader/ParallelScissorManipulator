@@ -1,0 +1,4 @@
+<map id="CanError" name="CanError">
+<area shape="rect" id="node3" href="$classCanOpenError.html" title="This class holds the error codes that describe CANopen error conditions. " alt="" coords="5,155,109,181"/>
+<area shape="rect" id="node2" href="$classError.html" title="This class is the root class for all error codes returned by functions defined within the Motion Libr..." alt="" coords="32,5,83,32"/>
+</map>

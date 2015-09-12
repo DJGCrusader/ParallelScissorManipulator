@@ -1,0 +1,7 @@
+<map id="CanInterface" name="CanInterface">
+<area shape="rect" id="node3" href="$classCopleyCAN.html" title="This class extends the generic CanInterface class into a working interface for the Copley can device ..." alt="" coords="5,155,96,181"/>
+<area shape="rect" id="node4" href="$classIxxatCAN.html" title="Ixxat specific CAN interface. " alt="" coords="121,155,200,181"/>
+<area shape="rect" id="node5" href="$classIxxatCANV3.html" title="Ixxat specific CAN interface. " alt="" coords="225,155,321,181"/>
+<area shape="rect" id="node6" href="$classKvaserCAN.html" title="Kvaser specific CAN interface. " alt="" coords="346,155,437,181"/>
+<area shape="rect" id="node2" href="$classRefObj.html" title="This class is used to track object references in the CML library. " alt="" coords="186,5,248,32"/>
+</map>

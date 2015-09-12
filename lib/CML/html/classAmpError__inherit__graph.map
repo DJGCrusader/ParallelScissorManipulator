@@ -1,0 +1,5 @@
+<map id="AmpError" name="AmpError">
+<area shape="rect" id="node4" href="$classAmpFault.html" title="This class represents latching amplifier fault conditions. " alt="" coords="6,229,84,256"/>
+<area shape="rect" id="node2" href="$classNodeError.html" title="This class represents node errors. " alt="" coords="5,80,85,107"/>
+<area shape="rect" id="node3" href="$classError.html" title="This class is the root class for all error codes returned by functions defined within the Motion Libr..." alt="" coords="20,5,71,32"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$classEvent.html" title="Events are a generic mechanism used to wait on some condition. " alt="" coords="5,81,61,108"/>
+<area shape="rect" id="node2" href="$classEventAll.html" title="This is an event that matches if all of a group of bits are set in the EventMap mask. " alt="" coords="130,5,201,32"/>
+<area shape="rect" id="node3" href="$classEventAny.html" title="This is an event that matches if any of a group of bits are set in the EventMap mask. " alt="" coords="126,56,205,83"/>
+<area shape="rect" id="node4" href="$classEventAnyClear.html" title="This is an event that matches if any of a group of bits are clear in the EventMap mask..." alt="" coords="110,107,221,133"/>
+<area shape="rect" id="node5" href="$classEventNone.html" title="This is an event that matches if none of a group of bits are set in the EventMap mask. " alt="" coords="122,157,209,184"/>
+</map>

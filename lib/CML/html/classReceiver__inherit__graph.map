@@ -1,0 +1,6 @@
+<map id="Receiver" name="Receiver">
+<area shape="rect" id="node5" title="This class uses a proprietory protocol to update the amplifier&#39;s internal firmware. " alt="" coords="251,155,373,181"/>
+<area shape="rect" id="node6" href="$classLSS.html" title="CANopen Layer Setting Services object. " alt="" coords="398,155,444,181"/>
+<area shape="rect" id="node7" title="Frame handling function for time stamp generator. " alt="" coords="469,155,616,181"/>
+<area shape="rect" id="node2" href="$classRefObj.html" title="This class is used to track object references in the CML library. " alt="" coords="281,5,343,32"/>
+</map>

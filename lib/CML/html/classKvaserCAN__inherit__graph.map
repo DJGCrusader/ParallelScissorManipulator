@@ -1,0 +1,4 @@
+<map id="KvaserCAN" name="KvaserCAN">
+<area shape="rect" id="node2" href="$classCanInterface.html" title="Abstract class used for low level interaction with CAN hardware. " alt="" coords="5,80,101,107"/>
+<area shape="rect" id="node3" href="$classRefObj.html" title="This class is used to track object references in the CML library. " alt="" coords="22,5,84,32"/>
+</map>

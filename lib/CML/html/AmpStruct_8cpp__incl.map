@@ -1,0 +1,31 @@
+<map id="AmpStruct.cpp" name="AmpStruct.cpp">
+<area shape="rect" id="node2" href="$CML_8h.html" title="Top level include file for the CML libraries. " alt="" coords="1352,80,1413,107"/>
+<area shape="rect" id="node3" href="$CML__Settings_8h.html" title="This file provides some configuration options used to customize the Copley Motion Libraries..." alt="" coords="1321,976,1436,1003"/>
+<area shape="rect" id="node5" href="$CML__AmpDef_8h.html" title="CML_AmpDef.h" alt="" coords="43,304,159,331"/>
+<area shape="rect" id="node6" href="$CML__Amp_8h.html" title="This file defines the Copley Amplifier object. " alt="" coords="1649,229,1743,256"/>
+<area shape="rect" id="node8" href="$CML__Error_8h.html" title="This file defines the top level error class used throughout the library. " alt="" coords="1245,827,1341,853"/>
+<area shape="rect" id="node9" href="$CML__Utils_8h.html" title="This file holds various handy utility types and functions. " alt="" coords="1762,901,1856,928"/>
+<area shape="rect" id="node11" href="$CML__Filter_8h.html" title="This file defines the Filter object. " alt="" coords="1531,379,1628,405"/>
+<area shape="rect" id="node12" href="$CML__SDO_8h.html" title="This header file defines the classes used to communicate to CANopen nodes using Service Data Objects ..." alt="" coords="1345,453,1441,480"/>
+<area shape="rect" id="node14" href="$CML__Can_8h.html" title="This file contains the base classes used to define the low level interface to the CAN network hardwar..." alt="" coords="1147,603,1239,629"/>
+<area shape="rect" id="node15" href="$CML__Reference_8h.html" title="This header file defines a set of classes used to handle reference counting within the CML library..." alt="" coords="539,677,667,704"/>
+<area shape="rect" id="node16" href="$CML__Threads_8h.html" title="The classes defined in this file provide an operating system independent way of accessing multi&#45;taski..." alt="" coords="1093,752,1208,779"/>
+<area shape="rect" id="node17" href="$CML__InputShaper_8h.html" title="This file defines the InputShaper object. " alt="" coords="1755,379,1893,405"/>
+<area shape="rect" id="node18" href="$CML__EventMap_8h.html" title="This file defines the Event Map class. " alt="" coords="1467,528,1593,555"/>
+<area shape="rect" id="node19" href="$CML__Copley_8h.html" title="This header file defines a generic Copley node type. " alt="" coords="1597,304,1707,331"/>
+<area shape="rect" id="node20" href="$CML__Firmware_8h.html" title="This file defines classes related to the Copley amplifier Firmware object. " alt="" coords="1973,752,2096,779"/>
+<area shape="rect" id="node21" href="$CML__Node_8h.html" title="This header file defines the classes that define a generic node on the network. " alt="" coords="619,379,717,405"/>
+<area shape="rect" id="node22" href="$CML__CanOpen_8h.html" title="This header file defines the classes used for the top level of the CANopen network. " alt="" coords="1045,453,1168,480"/>
+<area shape="rect" id="node23" href="$CML__EtherCAT_8h.html" title="This header file defines the classes used to represent the top level of the EtherCAT network interfac..." alt="" coords="661,453,787,480"/>
+<area shape="rect" id="node24" href="$CML__PDO_8h.html" title="This header file defines the classes used to communicate to CANopen nodes using Process Data Objects ..." alt="" coords="315,453,412,480"/>
+<area shape="rect" id="node25" href="$CML__Trajectory_8h.html" title="CML_Trajectory.h" alt="" coords="2273,677,2399,704"/>
+<area shape="rect" id="node26" href="$CML__Array_8h.html" title="This file implements a simple dynamic array template used in CML. " alt="" coords="2684,827,2783,853"/>
+<area shape="rect" id="node27" href="$CML__CopleyIO_8h.html" title="Standard CANopen I/O module support. " alt="" coords="379,229,501,256"/>
+<area shape="rect" id="node28" href="$CML__IO_8h.html" title="Standard CANopen I/O module support. " alt="" coords="292,304,373,331"/>
+<area shape="rect" id="node29" href="$CML__File_8h.html" title="This file holds various handy functions for parsing files. " alt="" coords="57,229,145,256"/>
+<area shape="rect" id="node30" href="$CML__Geometry_8h.html" title="This file contains class definitions used to define multi&#45;axis trajectory paths. " alt="" coords="2525,603,2651,629"/>
+<area shape="rect" id="node31" href="$CML__Linkage_8h.html" title="This file defines the Linkage object. " alt="" coords="2335,155,2448,181"/>
+<area shape="rect" id="node32" href="$CML__TrjScurve_8h.html" title="This file defines the TrjScurve class. " alt="" coords="2425,229,2548,256"/>
+<area shape="rect" id="node7" href="$CML__AmpStruct_8h.html" title="This file contains a number of structures used to pass configuration parameters to an Amp object..." alt="" coords="1731,304,1860,331"/>
+<area shape="rect" id="node13" href="$CML__Network_8h.html" title="This header file defines the classes used for the generic top level network interface. " alt="" coords="920,528,1036,555"/>
+</map>

@@ -1,0 +1,4 @@
+<map id="EtherCAT" name="EtherCAT">
+<area shape="rect" id="node2" href="$classNetwork.html" title="Abstract network class. " alt="" coords="9,80,79,107"/>
+<area shape="rect" id="node3" href="$classRefObj.html" title="This class is used to track object references in the CML library. " alt="" coords="13,5,75,32"/>
+</map>

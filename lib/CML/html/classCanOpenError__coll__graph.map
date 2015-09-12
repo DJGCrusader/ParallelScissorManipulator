@@ -1,0 +1,4 @@
+<map id="CanOpenError" name="CanOpenError">
+<area shape="rect" id="node2" href="$classCanError.html" title="Class used to represent an error condition returned from a CAN interface function. " alt="" coords="20,166,93,193"/>
+<area shape="rect" id="node3" href="$classError.html" title="This class is the root class for all error codes returned by functions defined within the Motion Libr..." alt="" coords="32,14,83,41"/>
+</map>

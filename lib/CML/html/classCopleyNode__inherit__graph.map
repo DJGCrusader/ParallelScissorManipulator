@@ -1,0 +1,5 @@
+<map id="CopleyNode" name="CopleyNode">
+<area shape="rect" id="node4" href="$classAmp.html" title="Copley Controls amplifier object. " alt="" coords="27,229,76,256"/>
+<area shape="rect" id="node2" href="$classNode.html" title="Node class. " alt="" coords="25,80,79,107"/>
+<area shape="rect" id="node3" href="$classRefObj.html" title="This class is used to track object references in the CML library. " alt="" coords="21,5,83,32"/>
+</map>

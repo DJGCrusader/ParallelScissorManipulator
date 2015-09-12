@@ -1,0 +1,6 @@
+<map id="IOModule::AlgOutPDO" name="IOModule::AlgOutPDO">
+<area shape="rect" id="node2" href="$classRPDO.html" title="Receive PDO (received by node, transmitted by this software). " alt="" coords="52,173,113,200"/>
+<area shape="rect" id="node3" href="$classPDO.html" title="PDO (Process Data Object) base class. " alt="" coords="57,96,108,123"/>
+<area shape="rect" id="node4" href="$classRefObj.html" title="This class is used to track object references in the CML library. " alt="" coords="10,5,72,32"/>
+<area shape="rect" id="node5" href="$classPmap.html" title="This class allows variables to be mapped into a PDO. " alt="" coords="97,5,152,32"/>
+</map>

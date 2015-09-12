@@ -1,0 +1,6 @@
+<map id="CopleyIOCfg" name="CopleyIOCfg">
+<area shape="rect" id="node2" href="$structCopleyIOInfo.html" title="IO Module characteristics data structure. " alt="" coords="5,5,104,32"/>
+<area shape="rect" id="node3" href="$structCopleyIOAnlg.html" title="This structure is used to return information about the analog inputs of a Copley I/O module..." alt="" coords="129,5,231,32"/>
+<area shape="rect" id="node4" href="$structCopleyIODigi.html" title="This structure is used to return information about the digital I/O of a Copley I/O module..." alt="" coords="255,5,355,32"/>
+<area shape="rect" id="node5" href="$structCopleyIOPWM.html" title="This structure is used to return information about the PWM outputs of a Copley I/O module..." alt="" coords="379,5,489,32"/>
+</map>

@@ -1,0 +1,8 @@
+<map id="can_kvaser.h" name="can_kvaser.h">
+<area shape="rect" id="node2" href="$CML__Settings_8h.html" title="This file provides some configuration options used to customize the Copley Motion Libraries..." alt="" coords="137,453,252,480"/>
+<area shape="rect" id="node4" href="$CML__Can_8h.html" title="This file contains the base classes used to define the low level interface to the CAN network hardwar..." alt="" coords="191,80,283,107"/>
+<area shape="rect" id="node9" href="$CML__Threads_8h.html" title="The classes defined in this file provide an operating system independent way of accessing multi&#45;taski..." alt="" coords="43,229,157,256"/>
+<area shape="rect" id="node5" href="$CML__Error_8h.html" title="This file defines the top level error class used throughout the library. " alt="" coords="232,304,328,331"/>
+<area shape="rect" id="node6" href="$CML__Utils_8h.html" title="This file holds various handy utility types and functions. " alt="" coords="283,379,377,405"/>
+<area shape="rect" id="node8" href="$CML__Reference_8h.html" title="This header file defines a set of classes used to handle reference counting within the CML library..." alt="" coords="123,155,251,181"/>
+</map>

@@ -1,0 +1,11 @@
+Copyright (C) 2010 [###]
+
+The EtherCAT Technology, the trade name and logo “EtherCAT” are the intellectual 
+property of, and protected by Beckhoff Automation GmbH. You may use the EtherCAT 
+Copley Control Library for the sole purpose of creating and/or selling or otherwise 
+distributing an EtherCAT network master provided that an EtherCAT Master License 
+is obtained from Beckhoff Automation GmbH.
+
+The EtherCAT Master License is available free of charge from Beckhoff Automation GmbH,
+Eiserstraße 5, D-33415 Verl, Germany (www.beckhoff.com).
+
