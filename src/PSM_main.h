@@ -48,6 +48,8 @@ float tDIST = 2.5230; //Distance of scissor coordinate system point t from cente
 float dist1 = 10.4240; //Distance of actuator from inner end of actuator
 float DIST2 = 5.8172; //Distance of inner end of actuator to point t
 
+float distH = 22.5; //sigma at 0mm
+
 //Scissors:
 float l_0 = 18;
 float l_1 = 14;

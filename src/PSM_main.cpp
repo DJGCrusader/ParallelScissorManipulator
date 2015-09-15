@@ -30,9 +30,12 @@ mat RzA = rotz(-pi/2);
 mat RzB = rotz(pi/6);
 mat RzC = rotz(5*pi/6);
 mat topPtDist(1,3);
-mat bA = RzA*topPtDist.t();
-mat bB = RzB*topPtDist.t();
-mat bC = RzC*topPtDist.t();
+mat bA(1,3);
+mat bB(1,3);
+mat bC(1,3);
+//get center points of A, B, C in O frame: 
+
+
 float pose[6]= {0, 0, 13, 0, 0, 0};
 
 mat dAct(6,1);
@@ -57,9 +60,11 @@ int main( void )
    eTp3 = eTp3.t();
    // cout << "eTp1: \n" << eTp1; //Print out eTp1 for testing
 
-   //get center points of A, B, C in O frame: 
-   
+
    topPtDist <<0 << tDIST << 0 << endr;
+   bA = RzA*topPtDist.t();
+   bB = RzB*topPtDist.t();
+   bC = RzC*topPtDist.t();
 
    /** 
    //TEST JACOBIAN
@@ -244,6 +249,8 @@ int main( void )
    act[4] = 100;
    act[5] = 100;
 
+   pose[2] = 46.1875; //Inches
+
    err = link.MoveTo( act );
    showerr( err, "Moving linkage" );
 
@@ -256,13 +263,10 @@ int main( void )
    /********************************************************************/
    // Move using the Jacobian
 
-   pose[2] = 24; //Inches
-
    //test vertical motion by moving up a quarter inch
    JT = getTransJacobian(act, pose);
    dT << 0 << endr << 0 << endr << .25 << endr;
    dAct = JT*dT;
-
 
    for(int count = 0; count < 6; count ++){
             myfile << act[count] << ", " ;
@@ -280,7 +284,9 @@ int main( void )
    act[5] = act[5] - dAct(5)*in2mm;
    pose[2] = pose[2]+.25;
 
-
+   cout << "Press ENTER to coninue...";
+   std::cin.ignore();
+   
    err = link.MoveTo( act );
    showerr( err, "Moving linkage" );
 
@@ -289,10 +295,8 @@ int main( void )
    printf( "Waiting for move up to finish...\n" );
    err = link.WaitMoveDone( 20000 ); 
    showerr( err, "waiting on initial move" );
-   cout << "Press ENTER to coninue...";
-   std::cin.ignore();
 
-   //Return
+   ///////////////////////////////////////////////////////////////////Return
    JT = getTransJacobian(act, pose);
    dT << 0 << endr << 0 << endr << -.25 << endr;
    dAct = JT*dT;
@@ -315,6 +319,9 @@ int main( void )
    act[5] = act[5] - dAct(5)*in2mm;
    pose[2] = pose[2]-.25;
 
+   cout << "Press ENTER to coninue...";
+   std::cin.ignore();
+   
    err = link.MoveTo( act );
    showerr( err, "Moving linkage" );
 
@@ -323,8 +330,7 @@ int main( void )
    printf( "Waiting for move up to finish...\n" );
    err = link.WaitMoveDone( 20000 ); 
    showerr( err, "waiting on initial move" );
-   cout << "Press ENTER to coninue...";
-   std::cin.ignore();
+   
 
    /*
    for( int j=0; j<50; j++ )
@@ -365,6 +371,10 @@ int main( void )
    act[4] = 0;
    act[5] = 0;
 
+   
+   cout << "Press ENTER to coninue...";
+   std::cin.ignore();
+
    err = link.MoveTo( act );
    showerr( err, "Moving linkage" );
 
@@ -373,6 +383,7 @@ int main( void )
    printf( "Waiting for move up to finish...\n" );
    err = link.WaitMoveDone( 20000 ); 
    showerr( err, "waiting on initial move" );
+   
    
    myfile.close();
 
@@ -422,10 +433,11 @@ mat getTransJacobian(Point<6> act, float pose[6]){
    //Yaw about Z, Pitch about Y', Roll about X''
 
    mat BeT(1,6);
-   //Convert act to sigmas
+
+   //Convert pose to mat
    BeT << pose[0] << 
           pose[1] <<
-          pose[2] << 
+          pose[2]-hB << 
           pose[3] <<
           pose[4] <<
           pose[5] << endr; 
@@ -434,12 +446,15 @@ mat getTransJacobian(Point<6> act, float pose[6]){
    mat sigma(1, 6);
 
    //Convert act to sigmas
-   sigma << DIST2+12-act[5]*mm2in << 
-            DIST2+12-act[0]*mm2in << 
-            DIST2+12-act[1]*mm2in << 
-            DIST2+12-act[2]*mm2in << 
-            DIST2+12-act[3]*mm2in << 
-            DIST2+12-act[4]*mm2in <<endr; 
+   sigma << distH-act[5]*mm2in << 
+            distH-act[0]*mm2in << 
+            distH-act[1]*mm2in << 
+            distH-act[2]*mm2in << 
+            distH-act[3]*mm2in << 
+            distH-act[4]*mm2in <<endr; 
+
+   // cout << "sigma: \n" << sigma << "\n";
+   // cout << "BeT: \n" << BeT << "\n";
 
    mat Rz = rotz(BeT[3]);
    mat Ry = roty(BeT[4]);
@@ -461,6 +476,9 @@ mat getTransJacobian(Point<6> act, float pose[6]){
    mat JSA = getSubJacobian(tA, sigma.submat(0,0,0,1));
    mat JSB = getSubJacobian(tB, sigma.submat(0,2,0,3));
    mat JSC = getSubJacobian(tC, sigma.submat(0,4,0,5));
+   // cout << "JSA: \n"<< JSA << "\n";
+   // cout << "JSB: \n"<< JSB << "\n";
+   // cout << "JSC: \n"<< JSC << "\n";
    
    //  Translational Jacobian
    mat JeT(9,6);
@@ -500,7 +518,7 @@ mat getTransJacobian(Point<6> act, float pose[6]){
    JIT = JIT*JeT;
    JIT = JIT.submat(0,0,5,2); //(:,1:3);
 
-   //cout << JIT << "\n";
+   // cout << "JIT: \n" << JIT << "\n";
    return JIT; 
 }
 
@@ -512,8 +530,8 @@ mat getSubJacobian(mat t, mat sigma){
    float sigma1 = sigma(0);
    float sigma2 = sigma(1);
 
-
    float genA = 2*sigma1 - yt - sqrt(3)*xt;
+
    float genB = sigma2-sigma1;
    float genC = yt-2*sigma2-sqrt(3)*xt;
    float genD = sqrt(3)*(sigma1+sigma2);
@@ -522,6 +540,9 @@ mat getSubJacobian(mat t, mat sigma){
    float genG = sigma1*sqrt(3)+2*xt;
    float genH = sigma1+2*yt;
    float genK = (1-pow((L/l_0),2))*(.5*sigma2+0.25*sigma1);
+
+   // cout << "xyzs1s2: \n" << xt << " "<< yt << " "<< zt << " "<< sigma1 << " "<< sigma2 << " \n" <<
+   //       "genA: " << genA << "genC: " << genC;
 
    float dSigma1dXt = (genC*genG+genK*genD)/(genK*genA-genC*genF);
    float dSigma1dYt = (genC*genH+genK*genB)/(genK*genA-genC*genF);
