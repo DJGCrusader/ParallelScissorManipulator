@@ -25,6 +25,7 @@ Daniel J. Gonzalez - dgonz@mit.edu
 mat eTp1(1,3);
 mat eTp2(1,3);
 mat eTp3(1,3);
+
 //Rotation Matrices for coordinate shift
 mat RzA = rotz(-pi/2);
 mat RzB = rotz(pi/6);
@@ -41,6 +42,9 @@ float pose[6]= {0, 0, 13, 0, 0, 0};
 mat dAct(6,1);
 mat JT(6,3);
 mat dT(3,1);
+mat dR(3,1);
+
+ofstream myfile;
 
 /**************************************************
 * Just home the motor and do a bunch of random
@@ -58,7 +62,17 @@ int main( void )
    eTp2 = eTp2.t(); 
    eTp3 << rT*cos(4*pi/3) << rT*sin(4*pi/3) << -hT << endr;
    eTp3 = eTp3.t();
+   dR << 0 << endr << 0 << endr << 0 << endr;
+
    // cout << "eTp1: \n" << eTp1; //Print out eTp1 for testing
+
+   myfile.open ("results.txt");
+   myfile << "-PSMR/TSE Control Code Output\n"<<
+             "-Daniel J. Gonzalez - dgonz@mit.edu\n\n"<<
+             "act0   act1   act2   act3   act4   act5   "<<
+             "x   y   z   psi   theta   phi   "<<
+             "dact0   dact1   dact2   dact3   dact4   dact5   "<<
+             "dx   dy   dz   dpsi   dtheta   dphi\n\n";
 
 
    topPtDist <<0 << tDIST << 0 << endr;
@@ -78,14 +92,7 @@ int main( void )
    getTransJacobian(act, pose);
    */
 
-   ofstream myfile;
-   myfile.open ("results.txt");
-   myfile << "-PSMR/TSE Control Code Output\n"<<
-             "-Daniel J. Gonzalez - dgonz@mit.edu\n\n"<<
-             "act0, act1, act2, act3, act4, act5, "<<
-             "x, y, z, psi, theta, phi, "<<
-             "dact0, dact1, dact2, dact3, dact4, dact5, "<<
-             "dx, dy, dz, dpsi, dtheta, dphi\n\n";
+   
 
    //cout << "ayy lmao\n"; //For debugging
 
@@ -226,12 +233,19 @@ int main( void )
 
    /*******************************************************************/
 
-   act[0] = 230;
-   act[1] = 230;
-   act[2] = 230;
-   act[3] = 230;
-   act[4] = 230;
-   act[5] = 230;
+   act[0] = 250;
+   act[1] = 250;
+   act[2] = 250;
+   act[3] = 250;
+   act[4] = 250;
+   act[5] = 250;
+
+   // act[0] = 110;
+   // act[1] = 110;
+   // act[2] = 110;
+   // act[3] = 110;
+   // act[4] = 110;
+   // act[5] = 110;
 
    err = link.MoveTo( act );
    showerr( err, "Moving linkage" );
@@ -242,14 +256,16 @@ int main( void )
    err = link.WaitMoveDone( 20000 ); 
    showerr( err, "waiting on initial move" );
 
-   act[0] = 100;
-   act[1] = 100;
-   act[2] = 100;
-   act[3] = 100;
-   act[4] = 100;
-   act[5] = 100;
+   act[0] = 99-1;
+   act[1] = 99-2;
+   act[2] = 99-2.5;
+   act[3] = 99-1;
+   act[4] = 99-2;
+   act[5] = 99-.5;
 
-   pose[2] = 46.1875; //Inches
+   //pose[2] = 46.1875; //Inches
+   //pose[2] = 50; //Inches 
+   pose[2] = 45.75; //Inches
 
    err = link.MoveTo( act );
    showerr( err, "Moving linkage" );
@@ -263,89 +279,72 @@ int main( void )
    /********************************************************************/
    // Move using the Jacobian
 
-   //test vertical motion by moving up a quarter inch
-   JT = getTransJacobian(act, pose);
-   dT << 0 << endr << 0 << endr << .25 << endr;
-   dAct = JT*dT;
+   float waypoints[4*6][6]= {
+      {0,0,.25,0,0,0},{0,0,.25,0,0,0},
+      {0,0,-.25,0,0,0},{0,0,-.25,0,0,0},
+      {0,0,-.25,0,0,0},{0,0,-.25,0,0,0},
+      {0,0,.25,0,0,0},{0,0,.25,0,0,0},
+      {.25,0,0,0,0,0},{.25,0,0,0,0,0},
+      {-.25,0,0,0,0,0},{-.25,0,0,0,0,0},
+      {-.25,0,0,0,0,0},{-.25,0,0,0,0,0},
+      {.25,0,0,0,0,0},{.25,0,0,0,0,0},
+      {0,.25,0,0,0,0},{0,.25,0,0,0,0},
+      {0,-.25,0,0,0,0},{0,-.25,0,0,0,0},
+      {0,-.25,0,0,0,0},{0,-.25,0,0,0,0},
+      {0,.25,0,0,0,0},{0,.25,0,0,0,0}
+   };
 
-   for(int count = 0; count < 6; count ++){
-            myfile << act[count] << ", " ;
+   for (int i = 0; i<4*6; i++){
+      //test vertical motion by moving up a quarter inch
+      JT = getTransJacobian(act, pose);
+      dT << waypoints[i][0] << endr << waypoints[i][1] << endr << waypoints[i][2] << endr;
+      dAct = JT*dT;
+      cout << "dAct: " << dAct.t() << "\n";
+
+      act[0] -= dAct(2)*in2mm;
+      act[1] -= dAct(3)*in2mm;
+      act[2] -= dAct(4)*in2mm;
+      act[3] -= dAct(5)*in2mm;
+      act[4] -= dAct(0)*in2mm;
+      act[5] -= dAct(1)*in2mm;
+
+      pose[0] += waypoints[i][0];
+      pose[1] += waypoints[i][1];
+      pose[2] += waypoints[i][2];
+
+      //cout << "Press ENTER to move by " << dT.t();
+      //std::cin.ignore();
+
+      writeState(act, pose, dAct, dT, dR);
+      
+      err = link.MoveTo( act );
+      showerr( err, "Moving linkage" );
+
+      // Wait for all amplifiers to finish the initial move by waiting on the
+      // linkage object itself.
+      printf( "Waiting for move up to finish...\n" );
+      err = link.WaitMoveDone( 20000 ); 
+      showerr( err, "waiting on initial move" );
    }
-   for(int count = 0; count < 6; count ++){
-            myfile << pose[count] << ", " ;
-   }
-   myfile << dAct << ", "<< dT << "\n";
 
-   act[0] = act[0] - dAct(0)*in2mm;
-   act[1] = act[1] - dAct(1)*in2mm;
-   act[2] = act[2] - dAct(2)*in2mm;
-   act[3] = act[3] - dAct(3)*in2mm;
-   act[4] = act[4] - dAct(4)*in2mm;
-   act[5] = act[5] - dAct(5)*in2mm;
-   pose[2] = pose[2]+.25;
+   writeState(act, pose, dAct, dT, dR);
 
-   cout << "Press ENTER to coninue...";
-   std::cin.ignore();
-   
-   err = link.MoveTo( act );
-   showerr( err, "Moving linkage" );
 
-   // Wait for all amplifiers to finish the initial move by waiting on the
-   // linkage object itself.
-   printf( "Waiting for move up to finish...\n" );
-   err = link.WaitMoveDone( 20000 ); 
-   showerr( err, "waiting on initial move" );
-
-   ///////////////////////////////////////////////////////////////////Return
-   JT = getTransJacobian(act, pose);
-   dT << 0 << endr << 0 << endr << -.25 << endr;
-   dAct = JT*dT;
-
-   ////////////////WRITE TO FILE///////////
-   for(int count = 0; count < 6; count ++){
-            myfile << act[count] << ", " ;
-   }
-   for(int count = 0; count < 6; count ++){
-            myfile << pose[count] << ", " ;
-   }
-   myfile << dAct << ", "<< dT << "\n";
-   ////////////////////////////////////////
-
-   act[0] = act[0] - dAct(0)*in2mm;
-   act[1] = act[1] - dAct(1)*in2mm;
-   act[2] = act[2] - dAct(2)*in2mm;
-   act[3] = act[3] - dAct(3)*in2mm;
-   act[4] = act[4] - dAct(4)*in2mm;
-   act[5] = act[5] - dAct(5)*in2mm;
-   pose[2] = pose[2]-.25;
-
-   cout << "Press ENTER to coninue...";
-   std::cin.ignore();
-   
-   err = link.MoveTo( act );
-   showerr( err, "Moving linkage" );
-
-   // Wait for all amplifiers to finish the initial move by waiting on the
-   // linkage object itself.
-   printf( "Waiting for move up to finish...\n" );
-   err = link.WaitMoveDone( 20000 ); 
-   showerr( err, "waiting on initial move" );
-   
-
-   /*
-   for( int j=0; j<50; j++ )
+   /********************************************************************/
+   // Do a bunch of random moves.
+   for( int j=0; j<10; j++ )
    {
       // Create an N dimensional position to move to
-      Point<AMPCT> act;
+      Point<AMPCT> pos;
 
       printf( "%d: moving to ", j );
       for( i=0; i<AMPCT; i++ ){
          double currentPosition;
          err = link[i].GetPositionActual(currentPosition);
          showerr( err, "ActualPosition" );
-         act[i] = 150+90*(rand() % 100000) / 100000.0;
-         //if( i ) act[i] = act[0];
-         printf( "%.3lf ", act[i] );
+         pos[i] = 75+60*(rand() % 100000) / 100000.0;
+         //if( i ) pos[i] = pos[0];
+         printf( "%.3lf ", pos[i] );
       }
       printf( "\n" );
 
@@ -353,15 +352,17 @@ int main( void )
       // multi-axis S-curve move to the new position.  This 
       // trajectory will be passed down to the amplifiers using
       // the PVT trajectory mode
-      err = link.MoveTo( act );
+      err = link.MoveTo( pos );
       showerr( err, "Moving linkage" );
 
       // Wait for the move to finish
       err = link.WaitMoveDone( 1000 * 30 );
       showerr( err, "waiting on linkage done" );
    }
-   */
 
+   /*****************************************************************/
+
+   
    /*****************************************************************/
 
    act[0] = 0;
@@ -371,9 +372,8 @@ int main( void )
    act[4] = 0;
    act[5] = 0;
 
-   
-   cout << "Press ENTER to coninue...";
-   std::cin.ignore();
+   //cout << "Press ENTER to coninue...";
+   //std::cin.ignore();
 
    err = link.MoveTo( act );
    showerr( err, "Moving linkage" );
@@ -383,7 +383,6 @@ int main( void )
    printf( "Waiting for move up to finish...\n" );
    err = link.WaitMoveDone( 20000 ); 
    showerr( err, "waiting on initial move" );
-   
    
    myfile.close();
 
@@ -446,16 +445,17 @@ mat getTransJacobian(Point<6> act, float pose[6]){
    mat sigma(1, 6);
 
    //Convert act to sigmas
-   sigma << distH-act[5]*mm2in << 
+   sigma << distH-act[4]*mm2in <<
+            distH-act[5]*mm2in << 
             distH-act[0]*mm2in << 
             distH-act[1]*mm2in << 
             distH-act[2]*mm2in << 
-            distH-act[3]*mm2in << 
-            distH-act[4]*mm2in <<endr; 
+            distH-act[3]*mm2in <<endr; 
 
    // cout << "sigma: \n" << sigma << "\n";
    // cout << "BeT: \n" << BeT << "\n";
 
+   //Get rotation matrices from top platform orientation
    mat Rz = rotz(BeT[3]);
    mat Ry = roty(BeT[4]);
    mat Rx = rotx(BeT[5]);
@@ -531,7 +531,6 @@ mat getSubJacobian(mat t, mat sigma){
    float sigma2 = sigma(1);
 
    float genA = 2*sigma1 - yt - sqrt(3)*xt;
-
    float genB = sigma2-sigma1;
    float genC = yt-2*sigma2-sqrt(3)*xt;
    float genD = sqrt(3)*(sigma1+sigma2);
@@ -541,18 +540,32 @@ mat getSubJacobian(mat t, mat sigma){
    float genH = sigma1+2*yt;
    float genK = (1-pow((L/l_0),2))*(.5*sigma2+0.25*sigma1);
 
-   // cout << "xyzs1s2: \n" << xt << " "<< yt << " "<< zt << " "<< sigma1 << " "<< sigma2 << " \n" <<
+   cout << "xyzs1s2: \n" << xt << " "<< yt << " "<< zt << " "<< sigma1 << " "<< sigma2 << " \n";
    //       "genA: " << genA << "genC: " << genC;
 
    float dSigma1dXt = (genC*genG+genK*genD)/(genK*genA-genC*genF);
-   float dSigma1dYt = (genC*genH+genK*genB)/(genK*genA-genC*genF);
+   float dSigma1dYt = (genC*genH-genK*genB)/(genK*genA-genC*genF);
    float dSigma1dZt = (genC*genE)/(genC*genF-genK*genA);
    float dSigma2dXt = (genF*genD+genG*genA)/(genF*genC-genK*genA);
-   float dSigma2dYt = (genH*genA+genF*genB)/(genF*genC-genK*genA);
+   float dSigma2dYt = (genH*genA-genF*genB)/(genF*genC-genK*genA);
    float dSigma2dZt = (genA*genE)/(genK*genA-genF*genC);
    
    mat JS(2,3);
    JS << dSigma1dXt << dSigma1dYt << dSigma1dZt << endr
        << dSigma2dXt << dSigma2dYt << dSigma2dZt << endr;
    return JS; 
+}
+
+int writeState(Point<6> act, float pose[6], mat dAct, mat dT, mat dR){
+
+   ////////////////WRITE TO FILE///////////   
+   for(int count = 0; count < 6; count ++){
+            myfile << act[count] << "  " ;
+   }
+   for(int count = 0; count < 6; count ++){
+            myfile << pose[count] << "   " ;
+   }
+   myfile << dAct.t() << ""<< dT.t() << dR.t() << "\n";
+   ////////////////////////////////////////
+   return 0;
 }

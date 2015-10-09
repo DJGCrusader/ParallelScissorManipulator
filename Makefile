@@ -20,7 +20,7 @@ OBJECTS := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.o)) lib/CM
 #
 
 CFLAGS := -g # -Wall
-LIB := -L lib -L lib -pthread -lpthread -lrt
+LIB := -L lib -L lib -pthread -lpthread -lrt -larmadillo
 INC := -I include -I lib/CML/inc -I lib/CML/inc/can -I lib/CML/c -I lib/linuxcan/canlib
 
 $(TARGET): $(OBJECTS)

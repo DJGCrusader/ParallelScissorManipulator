@@ -48,7 +48,7 @@ float tDIST = 2.5230; //Distance of scissor coordinate system point t from cente
 float dist1 = 10.4240; //Distance of actuator from inner end of actuator
 float DIST2 = 5.8172; //Distance of inner end of actuator to point t
 
-float distH = 22.5; //sigma at 0mm
+float distH = (173.26+326.02+100-76)*mm2in;//22.5 inches; //sigma at 0mm
 
 //Scissors:
 float l_0 = 18;
@@ -58,7 +58,7 @@ float L = l_0 + l_1*2+ l_2*2;
 
 //Top Platform
 float rT = 8; //Radius from center of top to ball joint
-float hT = 2.125; //Distance from top to ball joint
+float hT = 2; //2.125; //Distance from top to ball joint
 //float pose[6];
 
 // If a namespace has been defined in CML_Settings.h, this
@@ -85,3 +85,4 @@ mat rotz(float myAngle);
 
 mat getTransJacobian(Point<6> act, float pose[6]);
 mat getSubJacobian(mat tA, mat sigma);
+int writeState(Point<6> act, float pose[6], mat dAct, mat dT, mat dR);
