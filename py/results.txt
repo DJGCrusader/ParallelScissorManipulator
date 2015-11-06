@@ -1,0 +1,5 @@
+-PSMR/TSE Control Code Output
+-Daniel J. Gonzalez - dgonz@mit.edu
+
+act0   act1   act2   act3   act4   act5   x   y   z   psi   theta   phi   dact0   dact1   dact2   dact3   dact4   dact5   dx   dy   dz   dpsi   dtheta   dphi
+
