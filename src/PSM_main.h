@@ -27,6 +27,8 @@ Daniel J. Gonzalez - dgonz@mit.edu
 
 float pi = PI;
 
+bool isRunning = true;
+
 //Dimensions
 float in2mm = 25.4; 
 float mm2in = 1.0/in2mm;
@@ -46,15 +48,19 @@ float sA = 12; //stroke of the linear guide
 float rDIST = 1.2615; //radial only distance of scissor point from center
 float tDIST = 2.5230; //Distance of scissor coordinate system point t from center
 float dist1 = 10.4240; //Distance of actuator from inner end of actuator
-float DIST2 = 5.8172; //Distance of inner end of actuator to point t
+float SIGMA2ACTUATORFRONT = 5.8172; //Distance of inner end of actuator to point t
+float DIST2 = SIGMA2ACTUATORFRONT;
+
 
 float distH = (173.26+326.02+100-76)*mm2in;//22.5 inches; //sigma at 0mm
-
+float SIGMA2ACTUATOR = distH;
 //Scissors:
 float l_0 = 18;
 float l_1 = 14;
 float l_2 = 11;
 float L = l_0 + l_1*2+ l_2*2;
+
+float q[6] = {0,0,0,0,0,0};
 
 //Top Platform
 float rT = 8; //Radius from center of top to ball joint

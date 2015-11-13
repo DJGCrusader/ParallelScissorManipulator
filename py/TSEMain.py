@@ -5,8 +5,7 @@ Daniel J. Gonzalez - dgonz@mit.edu
 
 import TSEInterface as TSE
 
-def main:
+def main():
 	running = True
 	while(running):
-		
 		TSE.sendCommand()
