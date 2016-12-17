@@ -119,10 +119,10 @@ def solveNDIK(p=[0, 0, 48, 0, 0, 0], L=68.0, k1=18.0/68.0, k2=(np.pi/6.0), k3=0.
 
 		q[ii*2] = L*sigA
 		q[ii*2+1] = L*sigB
-
-	pos= [12 if (20.6-xx)>12 else(0 if (20.6-xx)<0 else (20.6-xx)) for xx in q]
-	q = [20.6-xx for xx in pos]
-	print 'pos: ', pos
+	#Why do this?
+	#pos= [12 if (20.6-xx)>12 else(0 if (20.6-xx)<0 else (20.6-xx)) for xx in q]
+	#q = [20.6-xx for xx in pos]
+	#print 'pos: ', pos
 	return q
 
 def test():

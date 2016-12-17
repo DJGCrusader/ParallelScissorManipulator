@@ -42,118 +42,124 @@ int main( void )
    #else
       EtherCAT net;
    #endif
-   const Error *err = net.Open( hw );
 
-   showerr( err, "Opening network" );
-
-   // Initialize the amplifiers using default settings
-   Amp amp[AMPCT];
-   AmpSettings set;
-   set.guardTime = 0;
-
-   cout << "Doing initialization"<<endl;
-
+   const Error *err;
    int i;
-   for( i=0; i<AMPCT; i++ )
-   {
-      //printf( "Initiating Amplifier %d\n", canNodeID+i );
-      cout << "Initializing Amplifier " << (canNodeID+i) << endl;
+   Amp amp[AMPCT];
+   if(robotPlugged){
+      err = net.Open( hw );
+      showerr( err, "Opening network" );
 
-      err = amp[i].Init( net, canNodeID+i, set );
-      showerr( err, "Initting amp" );
+      // Initialize the amplifiers using default settings
+      AmpSettings set;
+      set.guardTime = 0;
 
-      MtrInfo mtrInfo;
-      err = amp[i].GetMtrInfo( mtrInfo );
-      showerr( err, "Getting motor info\n" );
+      cout << "Doing initialization"<<endl;
+      for( i=0; i<AMPCT; i++ )
+      {
+         //printf( "Initiating Amplifier %d\n", canNodeID+i );
+         cout << "Initializing Amplifier " << (canNodeID+i) << endl;
 
-      // err = amp[i].SetCountsPerUnit( mtrInfo.ctsPerRev );
-      // printf( "CountsPerRev %d\n", mtrInfo.ctsPerRev );
+         err = amp[i].Init( net, canNodeID+i, set );
+         showerr( err, "Initting amp" );
 
-      err = amp[i].SetCountsPerUnit( 8000.0/5.0);     // User Units are now in mm
-      showerr( err, "Setting cpr\n" );
+         MtrInfo mtrInfo;
+         err = amp[i].GetMtrInfo( mtrInfo );
+         showerr( err, "Getting motor info\n" );
+
+         // err = amp[i].SetCountsPerUnit( mtrInfo.ctsPerRev );
+         // printf( "CountsPerRev %d\n", mtrInfo.ctsPerRev );
+
+         err = amp[i].SetCountsPerUnit( 8000.0/5.0);     // User Units are now in mm
+         showerr( err, "Setting cpr\n" );
+      }
    }
+      // Create a linkage object holding these amps
+      Linkage link;
 
-   // Create a linkage object holding these amps
-   Linkage link;
-   err = link.Init( AMPCT, amp );
-   showerr( err, "Linkage init" );
+   if(robotPlugged){
+      err = link.Init( AMPCT, amp );
+      showerr( err, "Linkage init" );
 
-   // Home the amps
-   HomeConfig hcfg;
-   err = link[0].GetHomeConfig(hcfg);
-   showerr(err, "get Home Config");
-   hcfg.velFast = 5;
-   hcfg.velSlow = 1;
-   hcfg.accel = 10;
-   hcfg.method  = CHM_NHOME_INDX;   // CHM_NONE;
-   hcfg.offset  = 0;
-   printf( "Home Velocity %f \n", hcfg.velFast );
-   printf( "Home Velocity Slow %f \n", hcfg.velSlow );
+      // Home the amps
+      HomeConfig hcfg;
+      err = link[0].GetHomeConfig(hcfg);
+      showerr(err, "get Home Config");
+      hcfg.velFast = 5;
+      hcfg.velSlow = 1;
+      hcfg.accel = 10;
+      hcfg.method  = CHM_NHOME_INDX;   // CHM_NONE;
+      hcfg.offset  = 0;
+      printf( "Home Velocity %f \n", hcfg.velFast );
+      printf( "Home Velocity Slow %f \n", hcfg.velSlow );
 
+      
+      // Setup the velocity, acceleration, deceleration & jerk limits
+      // for multi-axis moves using the linkage object
+      err = link.SetMoveLimits( 75, 75, 75, 100 );
+      showerr( err, "setting move limits" );
+
+      // Create an N dimensional position to move to
+      Point<AMPCT> act;
+
+      for( i=0; i<AMPCT; i++ )
+      {
+         // Assuming we are low to the ground and centered, first move forward 30mm. 
+         //Notice that the linkage object may be used like an array to reference the amplifiers.
+         double currentPosition;
+         err = link[i].GetPositionActual(currentPosition);
+         printf( "Current Position %f \n", currentPosition );
+         showerr( err, "ActualPosition" );
+         
+         act[i]= currentPosition+50; //in mm
+
+         // if(currentPosition<0){
+         //    act[i]= currentPosition+(0-currentPosition)+2.5; //in mm
+         // }else{
+         //    act[i]= 2.5;
+         // }
+         printf( "Goal Position %f mm \n", act[i]);
+      }
+
+      err = link.MoveTo( act );
+      showerr( err, "Moving linkage" );
+
+      // Wait for all amplifiers to finish the initial move by waiting on the
+      // linkage object itself.
+      printf( "Waiting for move up to finish...\n" );
+      err = link.WaitMoveDone( 20000 ); 
+      showerr( err, "waiting on initial move" );
+      
+
+      for( i=0; i<AMPCT; i++ )
+      {
+         // Home the amp.  Notice that the linkage object may be used 
+         // like an array to reference the amplifiers.
+         if(i==0){
+            hcfg.offset  = 2;
+         }else if(i==2 || i==3){
+            hcfg.offset  = -0.75;
+         }else if(i==4){
+            hcfg.offset  = -1;
+         }else{
+            hcfg.offset  = 0;
+         }
+
+         err = link[i].GoHome(hcfg); // hcfg 
+         showerr( err, "Going home" );
+      }
+
+      // Wait for all amplifiers to finish the home by waiting on the
+      // linkage object itself.
+      printf( "Waiting for home to finish...\n" );
+      err = link.WaitMoveDone( 20000 ); 
+      showerr( err, "waiting on home" );
+   }
    
-   // Setup the velocity, acceleration, deceleration & jerk limits
-   // for multi-axis moves using the linkage object
-   err = link.SetMoveLimits( 75, 75, 75, 100 );
-   showerr( err, "setting move limits" );
+   ////////////////////////////////////////////////////////////////////////////////////////// ^^^ Initialization and Homing Complete. ^^^
 
    // Create an N dimensional position to move to
    Point<AMPCT> act;
-
-   for( i=0; i<AMPCT; i++ )
-   {
-      // Assuming we are low to the ground and centered, first move forward 30mm. 
-      //Notice that the linkage object may be used like an array to reference the amplifiers.
-      double currentPosition;
-      err = link[i].GetPositionActual(currentPosition);
-      printf( "Current Position %f \n", currentPosition );
-      showerr( err, "ActualPosition" );
-      
-      act[i]= currentPosition+50; //in mm
-
-      // if(currentPosition<0){
-      //    act[i]= currentPosition+(0-currentPosition)+2.5; //in mm
-      // }else{
-      //    act[i]= 2.5;
-      // }
-      printf( "Goal Position %f mm \n", act[i]);
-   }
-
-   err = link.MoveTo( act );
-   showerr( err, "Moving linkage" );
-
-   // Wait for all amplifiers to finish the initial move by waiting on the
-   // linkage object itself.
-   printf( "Waiting for move up to finish...\n" );
-   err = link.WaitMoveDone( 20000 ); 
-   showerr( err, "waiting on initial move" );
-   
-
-   for( i=0; i<AMPCT; i++ )
-   {
-      // Home the amp.  Notice that the linkage object may be used 
-      // like an array to reference the amplifiers.
-      if(i==0){
-         hcfg.offset  = 2;
-      }else if(i==2 || i==3){
-         hcfg.offset  = -0.75;
-      }else if(i==4){
-         hcfg.offset  = -1;
-      }else{
-         hcfg.offset  = 0;
-      }
-
-      err = link[i].GoHome(hcfg); // hcfg 
-      showerr( err, "Going home" );
-   }
-
-   // Wait for all amplifiers to finish the home by waiting on the
-   // linkage object itself.
-   printf( "Waiting for home to finish...\n" );
-   err = link.WaitMoveDone( 20000 ); 
-   showerr( err, "waiting on home" );
-
-   
-   ////////////////////////////////////////////////////////////////////////////////////////// ^^^ Initialization and Homing Complete. ^^^
 
    act[0] = 99-1;
    act[1] = 99-2;
@@ -163,29 +169,66 @@ int main( void )
    act[5] = 99-.5;
    // Z is 45.75 inches
 
-   err = link.MoveTo( act );
-   showerr( err, "Moving linkage" );
-   // Wait for all amplifiers to finish the initial move by waiting on the
-   // linkage object itself.
-   printf( "Waiting for move up to finish...\n" );
-   err = link.WaitMoveDone( 20000 ); 
-   showerr( err, "waiting on initial move" );
+
+   if(robotPlugged){
+      err = link.MoveTo( act );
+      showerr( err, "Moving linkage" );
+      // Wait for all amplifiers to finish the initial move by waiting on the
+      // linkage object itself.
+      printf( "Waiting for move up to finish...\n" );
+      err = link.WaitMoveDone( 20000 ); 
+      showerr( err, "waiting on initial move" );
+   }
+
+   // Create an N dimensional slide vector
+   // Point<AMPCT> q;
+   double q[AMPCT];
+   char msgBack;
+   char qMsg[sizeof(double)];
+   double qTemp;
 
    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////Main Function
    while(isRunning){
-      //isRunning = getIsRunning()
+      std::cout<< "RUN CHECK\n";
+
+      msgBack = std::cin.get();
+      std::cout<< "CPP Receieves Message!\n";
+      isRunning = msgBack-48;
+
       if(isRunning){
-         //q = getWaypoint() 
+         std::cout<< "RUN OK\n";
 
          //Check if valid q. If not, then isRunning = false, break. Or, try again. 
          int checker = 0;
-         for (int i; i<AMPCT; i++){
+         for (int i = 0; i<AMPCT; i++){
+            std::cout<< "GIMME\n";
+
+            for (int j = 0; j<sizeof(double); j++){
+                  qMsg[j] = std::cin.get();
+                  std::cout<< qMsg[j] <<endl;
+            }
+
+            //printf("Received:%s\n", qMsg );
+
+            memcpy(&qTemp,&qMsg,sizeof(double));
+            printf( "Converted %f \n", qTemp);
+
+            q[i] = qTemp;
+            
             if(SIGMA2ACTUATOR - q[i]<=250 && SIGMA2ACTUATOR - q[i] >= 0){
                checker++;
             }
          }
+         for (int i = 0; i<AMPCT; i+=2){
+            if(sqrt(q[i]*q[i]+q[i]*q[i+1]+q[i+1]*q[i+1])<=MAXWIDTH){
+               checker+=2;
+            }
+         }
 
-         if(checker == AMPCT){
+         if(checker == 2*AMPCT){
+            checker = 0;
+            std::cout<< "GOOD Q\n";
+            std::cout<< "Moving to point...\n";
             //If all safe, Assign vector act[] with the new coords. If not, stay. 
             //Convert from q (sigma coords) to actuator coords (0 to 300mm)
             act[0] = SIGMA2ACTUATOR - q[0];
@@ -194,18 +237,26 @@ int main( void )
             act[3] = SIGMA2ACTUATOR - q[3];
             act[4] = SIGMA2ACTUATOR - q[4];
             act[5] = SIGMA2ACTUATOR - q[5];
-         }
+            if(robotPlugged){
+               err = link.MoveTo( act );
+               showerr( err, "Moving linkage" );
 
-         err = link.MoveTo( act );
-         showerr( err, "Moving linkage" );
-
-         // Wait for all amplifiers to finish the initial move by waiting on the
-         // linkage object itself.
-         printf( "Waiting for move up to finish...\n" );
-         err = link.WaitMoveDone( 20000 ); 
-         showerr( err, "waiting on initial move" );
+               // Wait for all amplifiers to finish the initial move by waiting on the
+               // linkage object itself.
+               printf( "Waiting for move up to finish...\n" );
+               err = link.WaitMoveDone( 20000 ); 
+               showerr( err, "waiting on initial move" );
+            }
+         }else{
+            checker = 0;
+            std::cout<< "BAD Q\n";
+            std::cout<< "Please try again...\n";
+         }      
          
          // tell Python we're done with this move. 
+         std::cout<<"Move Done.\n";
+      }else{
+         std::cout<<"Ending Program...\n";
       }
 
    }
@@ -221,15 +272,17 @@ int main( void )
 
    //cout << "Press ENTER to coninue...";
    //std::cin.ignore();
+   if(robotPlugged){
+      err = link.MoveTo( act );
+      showerr( err, "Moving linkage" );
 
-   err = link.MoveTo( act );
-   showerr( err, "Moving linkage" );
-
-   // Wait for all amplifiers to finish the initial move by waiting on the
-   // linkage object itself.
-   printf( "Waiting for move up to finish...\n" );
-   err = link.WaitMoveDone( 20000 ); 
-   showerr( err, "waiting on initial move" );
+      // Wait for all amplifiers to finish the initial move by waiting on the
+      // linkage object itself.
+      printf( "Waiting for move up to finish...\n" );
+      err = link.WaitMoveDone( 20000 ); 
+      showerr( err, "waiting on initial move" );
+   }
+   
    return 0;
 }
 

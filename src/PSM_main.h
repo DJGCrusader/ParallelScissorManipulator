@@ -27,7 +27,8 @@ Daniel J. Gonzalez - dgonz@mit.edu
 
 float pi = PI;
 
-bool isRunning = true;
+int isRunning = 1;
+bool robotPlugged = false; //Is this without the robot?
 
 //Dimensions
 float in2mm = 25.4; 
@@ -51,9 +52,11 @@ float dist1 = 10.4240; //Distance of actuator from inner end of actuator
 float SIGMA2ACTUATORFRONT = 5.8172; //Distance of inner end of actuator to point t
 float DIST2 = SIGMA2ACTUATORFRONT;
 
-
+float distHmm = 173.26+326.02+100-76;
 float distH = (173.26+326.02+100-76)*mm2in;//22.5 inches; //sigma at 0mm
-float SIGMA2ACTUATOR = distH;
+float SIGMA2ACTUATOR = distHmm;
+float MAXWIDTH = 907.6; //2*l_0*cos(alpha) in mm
+
 //Scissors:
 float l_0 = 18;
 float l_1 = 14;
